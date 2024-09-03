@@ -1,5 +1,5 @@
 # R version: 4, 4.1, 4.0
-ARG VARIANT="4"
+ARG VARIANT="4.4"
 FROM rocker/r-ver:${VARIANT}
 
 # Use the [Option] comment to specify true/false arguments that should appear in VS Code UX
@@ -25,7 +25,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         libxml2-dev \
         libxt-dev \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts \
-    && python3 -m pip --no-cache-dir install radian \
+    && python3 -m pip --no-cache-dir install radian 
+ 
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && pip --disable-pip-version-check --no-cache-dir install pybryt \
     && pip --disable-pip-version-check --no-cache-dir install pylint \
     && pip --disable-pip-version-check --no-cache-dir install jupyter \
@@ -41,7 +43,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && pip --disable-pip-version-check --no-cache-dir install nbinteract>=0.0.12 \
     && pip --disable-pip-version-check --no-cache-dir install otter-grader \
     && pip --disable-pip-version-check --no-cache-dir install okpy \
-    && pip --disable-pip-version-check --no-cache-dir install scikit-learn \
+    && pip --disable-pip-version-check --no-cache-dir install scikit-learn
+    
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && install2.r --error --skipinstalled --ncpus -1 \
         devtools \
         languageserver \
